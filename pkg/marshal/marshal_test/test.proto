@@ -1,0 +1,8 @@
+syntax = "proto3";
+package marshal_test;
+
+message TestOne {
+  string stringFoo = 1;
+  int32 intFoo = 2;
+  string stringFooB = 3;
+}
