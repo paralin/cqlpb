@@ -1,7 +1,7 @@
-Cassandra Utils
-===============
+Cassandra Protobuf
+==================
 
-Cassandra storage implementation in Go.
+Cassandra protobuf storage implementation in Go.
 
 Methodology
 ===========
