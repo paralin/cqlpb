@@ -33,3 +33,35 @@ The same goes the opposite direction for serialization.
  - Serialize any corresponding field to cassandra field, and zero it in the protobuf
    - proto3 does not store zeroed fields, this will save space
  - Serialize the protobuf to the proto field.
+
+Usage
+=====
+
+First, according to your schema, build a template map, for example:
+
+```go
+template := make(map[string]interface{})
+template["myStringVal"] = ""
+template["myIntVal"] = int32(0)
+template["myBoolVal"] = false
+template["proto"] = make(0, []byte)
+```
+
+The column names should match the names of the fields in your proto file.
+
+Any fields in your proto not specified in your template will be serialized in the "proto" field as a binary blob.
+
+You can serialize a protobuf message to a cassandra map for insertion like so:
+
+```go
+myMsg := &MyMessage{MyStringVal: "test"}
+row, err := marshal.Marshal(myMsg, template)
+```
+
+You can then deserialize that row like so:
+
+```go
+myMsg := &MyMessage{}
+err := marshal.Unmarshal(myMsg, row)
+myMsg.MyStringVal == "test" // true
+```
