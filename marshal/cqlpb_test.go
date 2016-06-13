@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	cqlpb_test "github.com/paralin/cqlpb/pkg/marshal/marshal_test"
+	cqlpb_test "github.com/paralin/cqlpb/marshal/marshal_test"
 )
 
 func TestMarshalTest1(t *testing.T) {
