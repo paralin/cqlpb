@@ -78,18 +78,18 @@ func Unmarshal(message proto.Message, row map[string]interface{}) error {
 
 	// todo: check field is bytes
 	protoRow, ok := row[protoFieldName]
-	if !ok {
-		return fmt.Errorf("Template must contain 'proto' field.")
-	}
-	protoArr, ok := protoRow.([]byte)
-	if !ok {
-		foundProtoType := reflect.ValueOf(protoRow).Type()
-		return fmt.Errorf("Expected []byte for 'proto' field, found %s.", foundProtoType.String())
-	}
+	if ok && protoRow != nil {
+		// return fmt.Errorf("Template must contain 'proto' field.")
+		protoArr, ok := protoRow.([]byte)
+		if !ok {
+			foundProtoType := reflect.ValueOf(protoRow).Type()
+			return fmt.Errorf("Expected []byte for 'proto' field, found %s.", foundProtoType.String())
+		}
 
-	// unmarshal proto
-	if err := proto.Unmarshal(protoArr, message); err != nil {
-		return err
+		// unmarshal proto
+		if err := proto.Unmarshal(protoArr, message); err != nil {
+			return err
+		}
 	}
 
 	// we expect ALL of the row vals to exist.
