@@ -1,4 +1,4 @@
-package cqlr
+package cqlpb
 
 import (
 	"github.com/gocql/gocql"
