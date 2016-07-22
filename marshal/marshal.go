@@ -55,7 +55,6 @@ func Marshal(messageo proto.Message, template map[string]interface{}) (map[strin
 			return nil, fmt.Errorf("Type of template '%s' doesn't match proto type '%s'.", rtyp.Name(), prop.Field.Type().Name())
 		}
 		result[k] = prop.Field.Interface()
-		fmt.Printf("Result %s is kind %s.\n", k, prop.Field.Kind().String())
 		prop.Field.Set(reflect.Zero(rtyp))
 	}
 
